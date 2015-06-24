@@ -1,12 +1,22 @@
 {
   "name": "pm2-redis",
   "version": "0.0.1",
+  "description": "Module to monitor redis",
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
     "pmx": "*",
     "redis-monitor": "*",
-    "redis": "*"
-  }
+    "redis": "*",
+    "shelljs": "*",
+    "pm2": "*"
+  },
+  "author": "",
+  "license": "ISC",
+  "apps": [
+    {
+      "script": "app.js"
+    }
+  ]
 }
