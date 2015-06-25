@@ -11,7 +11,7 @@ var scan = require('./lib/scan'),
 
 var conf = pmx.initModule({
 
-  pid              : pmx.resolvePidPaths(['/var/run/redis.pid']),
+  pid              : pmx.resolvePidPaths(['/var/run/redis/redis-server.pid']),
 
   widget : {
     type             : 'generic',
@@ -56,6 +56,6 @@ pmx.action('df', { comment : 'Flush logs' } , function(reply) {
 });
 
 pmx.action('restart server', { comment : 'Flush logs' } , function(reply) {
-  var child = shelljs.exec('sudo chown -R root /var/run/redis ;sudo  /etc/init.d/redis-server restart');
+  var child = shelljs.exec('/etc/init.d/redis-server restart');
   return reply(child);
 });
