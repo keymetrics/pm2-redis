@@ -11,7 +11,10 @@ var scan = require('./lib/scan'),
 
 var conf = pmx.initModule({
 
-  pid              : pmx.resolvePidPaths(['/var/run/redis/redis-server.pid']),
+  pid              : pmx.resolvePidPaths(['/var/run/redis/redis-server.pid',
+                                          '/var/run/redis/redis.pid',
+                                          '/var/run/redis-server.pid',
+                                          '/var/run/redis.pid']),
 
   widget : {
     type             : 'generic',
@@ -31,6 +34,7 @@ var conf = pmx.initModule({
     block : {
       actions : true,
       issues  : true,
+      meta    : false,
       main_probes : ['Total keys', 'cmd/sec', 'hits/sec', 'miss/sec', 'evt/sec', 'exp/sec']
     }
 
@@ -39,23 +43,17 @@ var conf = pmx.initModule({
   }
 });
 
-pmx.action('flush pm2 logs', { comment : 'Flush logs' } , function(reply) {
-  var child = shelljs.exec('pm2 flush');
+pmx.action('restart', function(reply) {
+  var child = shelljs.exec('/etc/init.d/redis-server restart');
   return reply(child);
 });
 
-
-pmx.action('throw error', { comment : 'Flush logs' } , function(reply) {
-  pmx.notify(new Error('Failure'));
-  return reply({success:true});
-});
-
-pmx.action('df', { comment : 'Flush logs' } , function(reply) {
-  var child = shelljs.exec('df');
+pmx.action('backup', function(reply) {
+  var child = shelljs.exec('redis-cli bgsave');
   return reply(child);
 });
 
-pmx.action('restart server', { comment : 'Flush logs' } , function(reply) {
+pmx.action('upgrade', function(reply) {
   var child = shelljs.exec('/etc/init.d/redis-server restart');
   return reply(child);
 });

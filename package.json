@@ -6,11 +6,13 @@
     "start": "node app"
   },
   "dependencies": {
-    "pmx": "*",
-    "redis-monitor": "*",
-    "redis": "*",
-    "shelljs": "*",
-    "pm2": "*"
+    "pmx"               : "*",
+    "redis-monitor"     : "*",
+    "redis-scanstreams" : "*",
+    "stream-to-array"   : "*",
+    "redis"             : "*",
+    "shelljs"           : "*",
+    "pm2"               : "*"
   },
   "author": "",
   "license": "ISC",
