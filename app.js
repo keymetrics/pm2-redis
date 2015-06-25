@@ -31,7 +31,7 @@ var conf = pmx.initModule({
     block : {
       actions : true,
       issues  : true,
-      main_probes : ['Total keys', 'Uptime', 'Connected clients', 'cmd/sec']
+      main_probes : ['Total keys', 'cmd/sec', 'hits/sec', 'miss/sec', 'evt/sec', 'exp/sec']
     }
 
     // Status
@@ -56,6 +56,6 @@ pmx.action('df', { comment : 'Flush logs' } , function(reply) {
 });
 
 pmx.action('restart server', { comment : 'Flush logs' } , function(reply) {
-  var child = shelljs.exec('/etc/init.d/redis-server restart');
+  var child = shelljs.exec('sudo chown -R root /var/run/redis ;sudo  /etc/init.d/redis-server restart');
   return reply(child);
 });
