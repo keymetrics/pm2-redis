@@ -11,8 +11,7 @@
     "redis-scanstreams" : "*",
     "stream-to-array"   : "*",
     "redis"             : "*",
-    "shelljs"           : "*",
-    "pm2"               : "*"
+    "shelljs"           : "*"
   },
   "author": "",
   "license": "ISC",

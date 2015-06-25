@@ -1,6 +1,5 @@
 var scan = require('./lib/scan'),
     versions = require('./lib/versions'),
-    pm2 = require('pm2'),
     info = require('./lib/info'),
     pmx     = require('pmx'),
     shelljs = require('shelljs'),
