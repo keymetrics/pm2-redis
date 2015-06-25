@@ -1,17 +1,17 @@
 {
   "name": "pm2-redis",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Module to monitor redis",
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
-    "pmx"               : "*",
-    "redis-monitor"     : "*",
-    "redis-scanstreams" : "*",
-    "stream-to-array"   : "*",
-    "redis"             : "*",
-    "shelljs"           : "*"
+    "pmx": "*",
+    "redis-monitor": "*",
+    "redis-scanstreams": "*",
+    "stream-to-array": "*",
+    "redis": "*",
+    "shelljs": "*"
   },
   "author": "",
   "license": "ISC",
