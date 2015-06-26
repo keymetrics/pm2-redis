@@ -1,11 +1,16 @@
 {
   "name": "pm2-redis",
+<<<<<<< Updated upstream
   "version": "0.1.0",
+=======
+  "version": "0.0.5",
+>>>>>>> Stashed changes
   "description": "Module to monitor redis",
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
+    "numeral": "*",
     "pmx": "*",
     "redis-monitor": "*",
     "redis-scanstreams": "*",
