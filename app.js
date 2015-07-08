@@ -10,20 +10,20 @@ var scan = require('./lib/scan'),
 
 var conf = pmx.initModule({
 
-  pid              : pmx.resolvePidPaths(['/var/run/redis/redis-server.pid',
-                                          '/var/run/redis/redis.pid',
-                                          '/var/run/redis-server.pid',
-                                          '/var/run/redis.pid']),
+  pid    : pmx.resolvePidPaths(['/var/run/redis/redis-server.pid',
+                                '/var/run/redis/redis.pid',
+                                '/var/run/redis-server.pid',
+                                '/var/run/redis.pid']),
 
   widget : {
-    type             : 'generic',
-    logo             : 'http://redis.io/images/redis-white.png',
+    type : 'generic',
+    logo : 'http://redis.io/images/redis-white.png',
 
     // 0 = main element
     // 1 = secondary
     // 2 = main border
     // 3 = secondary border
-    theme            : ['#9F1414', '#591313', 'white', 'white'],
+    theme : ['#9F1414', '#591313', 'white', 'white'],
 
     el : {
       probes  : true,
@@ -34,7 +34,7 @@ var conf = pmx.initModule({
       actions : true,
       issues  : true,
       meta    : false,
-      main_probes : ['Total keys', 'cmd/sec', 'hits', 'miss', 'evt', 'exp']
+      main_probes : ['Total keys', 'cmd/sec', 'hits/sec', 'miss', 'evt', 'exp']
     }
 
     // Status
