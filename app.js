@@ -34,7 +34,7 @@ var conf = pmx.initModule({
       actions : true,
       issues  : true,
       meta    : false,
-      main_probes : ['Total keys', 'cmd/sec', 'hits/sec', 'miss', 'evt', 'exp']
+      main_probes : ['Total keys', 'cmd/sec', 'hits/sec', 'miss/sec', 'evt/sec', 'exp/sec']
     }
 
     // Status
