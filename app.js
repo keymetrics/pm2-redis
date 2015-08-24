@@ -1,9 +1,9 @@
 
-var    pmx     = require('pmx'),
+var pmx     = require('pmx'),
     shelljs = require('shelljs'),
     fs      = require('fs'),
     path    = require('path'),
-    redis = require('redis');
+    redis   = require('redis');
 
 
 
