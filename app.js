@@ -1,10 +1,9 @@
-var scan = require('./lib/scan'),
-    versions = require('./lib/versions'),
-    info = require('./lib/info'),
-    pmx     = require('pmx'),
+
+var    pmx     = require('pmx'),
     shelljs = require('shelljs'),
     fs      = require('fs'),
-    path    = require('path');
+    path    = require('path'),
+    redis = require('redis');
 
 
 
@@ -35,12 +34,22 @@ var conf = pmx.initModule({
       issues  : true,
       meta    : false,
       main_probes : ['Total keys', 'cmd/sec', 'hits/sec', 'miss/sec', 'evt/sec', 'exp/sec']
-    }
+    },
 
+    auth  :false
     // Status
     // Green / Yellow / Red
   }
 });
+
+client = redis.createClient();
+
+if (pmx.getConf().module_conf.password !== '')
+  client.auth(pmx.getConf().module_conf.password);
+
+var scan = require('./lib/scan'),
+    versions = require('./lib/versions'),
+    info = require('./lib/info');
 
 pmx.action('restart', function(reply) {
   var child = shelljs.exec('/etc/init.d/redis-server restart');

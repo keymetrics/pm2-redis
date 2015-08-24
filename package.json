@@ -13,6 +13,9 @@
     "redis": "*",
     "shelljs": "*"
   },
+  "config": {
+    "password": ""
+  },
   "author": "",
   "license": "ISC",
   "apps": [
