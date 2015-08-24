@@ -34,9 +34,8 @@ var conf = pmx.initModule({
       issues  : true,
       meta    : false,
       main_probes : ['Total keys', 'cmd/sec', 'hits/sec', 'miss/sec', 'evt/sec', 'exp/sec']
-    },
+    }
 
-    auth  :false
     // Status
     // Green / Yellow / Red
   }
