@@ -44,7 +44,7 @@ var conf = pmx.initModule({
 client = redis.createClient();
 
 if (pmx.getConf().module_conf.password !== '')
-  client.auth(pmx.getConf().module_conf.password);
+  client.auth(pmx.getConf().password);
 
 var scan = require('./lib/scan'),
     versions = require('./lib/versions'),
