@@ -39,28 +39,29 @@ var conf = pmx.initModule({
     // Status
     // Green / Yellow / Red
   }
-});
+}, function(err, conf) {
+  
+  client = redis.createClient(conf.port, conf.ip, {});
 
-client = redis.createClient();
+  if (conf.password !== '')
+    client.auth(conf.password);
 
-if (pmx.getConf().module_conf.password !== '')
-  client.auth(pmx.getConf().password);
-
-var scan = require('./lib/scan'),
+  var scan = require('./lib/scan'),
     versions = require('./lib/versions'),
     info = require('./lib/info');
 
-pmx.action('restart', function(reply) {
-  var child = shelljs.exec('/etc/init.d/redis-server restart');
-  return reply(child);
-});
+  pmx.action('restart', function(reply) {
+    var child = shelljs.exec('/etc/init.d/redis-server restart');
+    return reply(child);
+  });
 
-pmx.action('backup', function(reply) {
-  var child = shelljs.exec('redis-cli bgsave');
-  return reply(child);
-});
+  pmx.action('backup', function(reply) {
+    var child = shelljs.exec('redis-cli bgsave');
+    return reply(child);
+  });
 
-pmx.action('upgrade', function(reply) {
-  var child = shelljs.exec('/etc/init.d/redis-server restart');
-  return reply(child);
+  pmx.action('upgrade', function(reply) {
+    var child = shelljs.exec('/etc/init.d/redis-server restart');
+    return reply(child);
+  });  
 });
