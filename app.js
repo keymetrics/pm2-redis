@@ -8,7 +8,6 @@ var pmx         = require('pmx'),
     exec        = require('child_process').exec,
     redis       = require('redis'),
     metricsMod  = require('./lib/metrics.js');
-    metrics     = new metricsMod();
 
 var conf = pmx.initModule({
   pid    : pmx.resolvePidPaths(['/var/run/redis/redis-server.pid',
@@ -49,6 +48,9 @@ var conf = pmx.initModule({
 
   if (conf.password !== '')
     client.auth(REDIS_PWD);
+
+  // construc metrics
+  var metrics = new metricsMod(WORKER_INTERVAL);
 
   // init metrics
   metrics.initMetrics();
