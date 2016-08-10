@@ -7,7 +7,7 @@
 var pmx     = require('pmx'),
     exec    = require('child_process').exec,
     redis   = require('redis');
-    metrics = require('metrics');
+    metrics = require('./lib/metrics');
 
 var conf = pmx.initModule({
   pid    : pmx.resolvePidPaths(['/var/run/redis/redis-server.pid',
