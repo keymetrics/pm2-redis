@@ -50,14 +50,14 @@ var conf = pmx.initModule({
     client.auth(REDIS_PWD);
 
   // init metrics
-  metrics.init();
+  metrics.initMetrics();
 
   /** When the client is connected, start the worker */
   client.on("ready", function () {
     // set general redis metrics that doesnt change
-    redisTcp.set(client.server_info.tcp_port);
-    redisProcId.set(client.server_info.process_id);
-    redisVersion.set(client.server_info.redis_version);
+    metrics.probes.redisTcp.set(client.server_info.tcp_port);
+    metrics.probes.redisProcId.set(client.server_info.process_id);
+    metrics.probes.redisVersion.set(client.server_info.redis_version);
     
     // start worker
     metrics.updateMetrics();
