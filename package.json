@@ -1,32 +1,32 @@
 {
   "name": "pm2-redis",
-  "version": "0.9.1",
-  "description": "Module to monitor redis",
-  "scripts": {
-    "start": "node app"
-  },
+  "version": "2.0.0",
+  "description": "PM2 Module to monitor redis",
+  "main": "app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/pm2-hive/pm2-redis.git" 
   }, 
+  "bugs": {
+    "url": "https://github.com/pm2-hive/pm2-redis/issues"
+  },
+  "homepage": "https://github.com/pm2-hive/pm2-redis",
   "dependencies": {
     "pmx": "*",
-    "redis-monitor": "*",
-    "redis-scanstreams": "*",
-    "stream-to-array": "*",
-    "redis": "*",
-    "shelljs": "*"
+    "redis": "*"
   },
+  "apps": [
+    {
+      "name": "pm2-redis",
+      "script": "app.js"
+    }
+  ],
   "config": {
     "ip": "127.0.0.1",
     "port": "6379",
-    "password": ""
+    "password": "",
+    "workerInterval": 2
   },
-  "author": "",
-  "license": "ISC",
-  "apps": [
-    {
-      "script": "app.js"
-    }
-  ]
+  "author": "vmarchaud",
+  "license": "MIT"
 }

@@ -1,19 +1,19 @@
+/**
+ * Copyright 2016 Keymetrics Team. All rights reserved.
+ * Use of this source code is governed by a license that
+ * can be found in the LICENSE file.
+ */
 
 var pmx     = require('pmx'),
-    shelljs = require('shelljs'),
-    fs      = require('fs'),
-    path    = require('path'),
+    exec    = require('child_process').exec,
     redis   = require('redis');
 
-
-
 var conf = pmx.initModule({
-
   pid    : pmx.resolvePidPaths(['/var/run/redis/redis-server.pid',
                                 '/var/run/redis/redis.pid',
                                 '/var/run/redis-server.pid',
                                 '/var/run/redis.pid']),
-
+  
   widget : {
     type : 'generic',
     logo : 'http://redis.io/images/redis-white.png',
@@ -35,33 +35,37 @@ var conf = pmx.initModule({
       meta    : false,
       main_probes : ['Total keys', 'cmd/sec', 'hits/sec', 'miss/sec', 'evt/sec', 'exp/sec']
     }
-
-    // Status
-    // Green / Yellow / Red
   }
 }, function(err, conf) {
+
+  var WORKER_INTERVAL = (conf.workerInterval * 1000) || 2000;
+  var REDIS_PORT      = conf.port || process.env.PM2_REDIS_PORT;
+  var REDIS_IP        = conf.ip || process.env.PM2_REDIS_IP;
+  var REDIS_PWD       = conf.pwd || process.env.PM2_REDIS_PWD;
   
-  client = redis.createClient(conf.port, conf.ip, {});
+  client = redis.createClient(REDIS_PORT, REDIS_IP, {});
 
   if (conf.password !== '')
-    client.auth(conf.password);
+    client.auth(REDIS_PWD);
 
-  var scan = require('./lib/scan'),
-    versions = require('./lib/versions'),
-    info = require('./lib/info');
+  // require metrics
+  require('./lib/metrics');
 
+  // register restart action
   pmx.action('restart', function(reply) {
-    var child = shelljs.exec('/etc/init.d/redis-server restart');
-    return reply(child);
+    exec('/etc/init.d/redis-server restart', function (err, out, error) {
+      if (err)
+        return reply(err);
+      return reply(out);
+    });
   });
 
+  // register restart action
   pmx.action('backup', function(reply) {
-    var child = shelljs.exec('redis-cli bgsave');
-    return reply(child);
+    exec('redis-cli bgsave', function (err, out, error) {
+      if (err)
+        return reply(err);
+      return reply(out);
+    });
   });
-
-  pmx.action('upgrade', function(reply) {
-    var child = shelljs.exec('/etc/init.d/redis-server restart');
-    return reply(child);
-  });  
 });
