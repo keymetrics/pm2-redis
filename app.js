@@ -62,7 +62,7 @@ var conf = pmx.initModule({
     
     // start worker
     metrics.updateMetrics();
-    setInterval(metrics.updateMetrics, WORKER_INTERVAL);
+    setInterval(metrics.updateMetrics.bind(metrics), WORKER_INTERVAL);
   });
 
   // register restart action
