@@ -17,7 +17,7 @@ var conf = pmx.initModule({
   
   widget : {
     type : 'generic',
-    logo : 'http://redis.io/images/redis-white.png',
+    logo : 'https://raw.githubusercontent.com/pm2-hive/pm2-redis/master/pres/redis-white.png',
 
     // 0 = main element
     // 1 = secondary
