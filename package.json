@@ -1,6 +1,6 @@
 {
   "name": "pm2-redis",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "PM2 Module to monitor redis",
   "main": "app.js",
   "repository": {

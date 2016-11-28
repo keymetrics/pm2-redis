@@ -46,7 +46,7 @@ var conf = pmx.initModule({
   
   client = redis.createClient(REDIS_PORT, REDIS_IP, {});
 
-  if (conf.password !== '')
+  if (typeof(REDIS_PWD) === 'string')
     client.auth(REDIS_PWD);
 
   // construc metrics
@@ -70,18 +70,14 @@ var conf = pmx.initModule({
   // register restart action
   pmx.action('restart', function(reply) {
     exec('/etc/init.d/redis-server restart', function (err, out, error) {
-      if (err)
-        return reply(err);
-      return reply(out);
+      return err ? reply(err) : reply(out);
     });
   });
 
   // register restart action
   pmx.action('backup', function(reply) {
     exec('redis-cli bgsave', function (err, out, error) {
-      if (err)
-        return reply(err);
-      return reply(out);
+      return err ? reply(err) : reply(out);
     });
   });
 });
