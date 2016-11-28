@@ -42,7 +42,7 @@ var conf = pmx.initModule({
   var WORKER_INTERVAL = (conf.workerInterval * 1000) || 2000;
   var REDIS_PORT      = conf.port || process.env.PM2_REDIS_PORT;
   var REDIS_IP        = conf.ip || process.env.PM2_REDIS_IP;
-  var REDIS_PWD       = conf.pwd || process.env.PM2_REDIS_PWD;
+  var REDIS_PWD       = conf.password || process.env.PM2_REDIS_PWD;
   
   client = redis.createClient(REDIS_PORT, REDIS_IP, {});
 
