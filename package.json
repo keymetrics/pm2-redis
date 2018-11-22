@@ -5,14 +5,14 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pm2-hive/pm2-redis.git" 
-  }, 
+    "url": "https://github.com/pm2-hive/pm2-redis.git"
+  },
   "bugs": {
     "url": "https://github.com/pm2-hive/pm2-redis/issues"
   },
   "homepage": "https://github.com/pm2-hive/pm2-redis",
   "dependencies": {
-    "pmx": "*",
+    "@pm2/io": "^2.4.7",
     "redis": "*"
   },
   "apps": [

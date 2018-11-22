@@ -4,17 +4,12 @@
  * can be found in the LICENSE file.
  */
 
-var pmx         = require('pmx'),
+var pmx         = require('@pm2/io'),
     exec        = require('child_process').exec,
     redis       = require('redis'),
     metricsMod  = require('./lib/metrics.js');
 
 var conf = pmx.initModule({
-  pid    : pmx.resolvePidPaths(['/var/run/redis/redis-server.pid',
-                                '/var/run/redis/redis.pid',
-                                '/var/run/redis-server.pid',
-                                '/var/run/redis.pid']),
-  
   widget : {
     type : 'generic',
     logo : 'https://raw.githubusercontent.com/pm2-hive/pm2-redis/master/pres/redis-white.png',
@@ -40,9 +35,9 @@ var conf = pmx.initModule({
 }, function(err, conf) {
 
   var WORKER_INTERVAL = (conf.workerInterval * 1000) || 2000;
-  var REDIS_PORT      = conf.port || process.env.PM2_REDIS_PORT;
-  var REDIS_IP        = conf.ip || process.env.PM2_REDIS_IP;
-  var REDIS_PWD       = conf.password || process.env.PM2_REDIS_PWD;
+  var REDIS_PORT      = process.env.PM2_REDIS_PORT || conf.port;
+  var REDIS_IP        = process.env.PM2_REDIS_IP || conf.ip;
+  var REDIS_PWD       = process.env.PM2_REDIS_PWD || conf.password;
   
   client = redis.createClient(REDIS_PORT, REDIS_IP, {});
 
@@ -63,8 +58,8 @@ var conf = pmx.initModule({
     metrics.probes.redisVersion.set(client.server_info.redis_version);
     
     // start worker
-    metrics.updateMetrics();
-    setInterval(metrics.updateMetrics.bind(metrics), WORKER_INTERVAL);
+    metrics.updateMetrics(client);
+    setInterval(metrics.updateMetrics.bind(metrics, client), WORKER_INTERVAL);
   });
 
   // register restart action
